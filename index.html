@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Museum of Faded Things</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+:root{--bg:#e9dcc0;--ink:#2e2418;--ac:#7a2e1d;--cd:#dccaa3;--mu:#6b5a3e;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#1f1812;--ink:#efe0c2;--ac:#e0a458;--cd:#2c2218;--mu:#b5a07a}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#1f1812;--ink:#efe0c2;--ac:#e0a458;--cd:#2c2218;--mu:#b5a07a}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font:17px/1.5 "EB Garamond",Georgia,serif;display:flex;flex-direction:column}
+h1{margin:0;padding:12px 16px 0;font:700 19px Cinzel,Georgia,serif;letter-spacing:1px}
+h1 small{display:block;font:italic 400 14px "EB Garamond",Georgia,serif;letter-spacing:0;color:var(--mu)}
+#st{flex:1;min-height:34vh;background:radial-gradient(ellipse at 50% 38%,#5c4631 0%,#2b1f15 58%,#100b07 100%)}
+canvas{width:100%;height:100%;display:block;touch-action:none}
+#pn{background:var(--cd);padding:12px 16px 10px;max-height:46vh;overflow-y:auto;border-top:4px double var(--mu)}
+#nm{font:600 19px Cinzel,Georgia,serif;letter-spacing:.5px}#yr{color:var(--mu);font-style:italic;font-size:15px}
+#pn p{margin:6px 0}#tp{color:var(--ac);font-weight:500}
+#ac{background:var(--ink);color:var(--bg);border:0;border-radius:3px;padding:8px 14px;font:600 13px Cinzel,Georgia,serif;letter-spacing:.5px;margin:4px 0 8px}
+#ch{display:flex;gap:6px;overflow-x:auto;padding:2px 0 6px}
+#ch button{flex:none;border:1px solid var(--mu);background:none;color:var(--ink);border-radius:3px;padding:4px 10px;font:16px "EB Garamond",Georgia,serif}
+#ch button.on{background:var(--ink);color:var(--bg)}#ch button.off{opacity:.35}
+#sl{display:flex;gap:10px;align-items:center;font-size:15px;color:var(--mu)}#sl input{flex:1;accent-color:var(--ac)}
+#fx{font-size:16px}#fx b{font:600 14px Cinzel,Georgia,serif;color:var(--ac)}
+#in{position:fixed;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(ellipse at 50% 40%,#5c4631,#1a120b 75%);color:#f0e2c6;transition:opacity .9s}#in.h{opacity:0;pointer-events:none}#in h2{font:700 30px Cinzel,Georgia,serif;letter-spacing:2px;margin:0 0 10px}#in p{margin:6px 0;font-size:19px;font-style:italic;color:#d9c8a2}#in .s{font-style:normal;font-size:16px;max-width:300px;margin:18px auto}#go{background:#e0a458;color:#1a120b;border:0;border-radius:3px;padding:11px 22px;font:600 14px Cinzel,Georgia,serif;letter-spacing:1px;margin-top:8px}
+html,body{overflow:hidden}body{display:block}
+#st{position:fixed;inset:0;min-height:0}#st::after{content:"";position:absolute;inset:12px;border:1px solid rgba(224,164,88,.35);pointer-events:none;z-index:2}
+#st canvas{position:relative;z-index:1}
+#hd{position:absolute;top:calc(env(safe-area-inset-top,0px) + 24px);left:28px;right:28px;color:#f0e2c6;pointer-events:none;z-index:2}
+#hd small{display:block;font:600 12px Cinzel,Georgia,serif;letter-spacing:2px;color:#e0a458;margin-bottom:8px}
+#nm{font:600 28px/1.15 Cinzel,Georgia,serif;letter-spacing:1px}#yr{font-style:italic;font-size:16px;color:#d9c8a2;margin-top:6px;max-width:300px;line-height:1.35}
+#wm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 190px Cinzel,Georgia,serif;color:#f0e2c6;opacity:.06;pointer-events:none}
+.ar{position:absolute;top:42%;z-index:3;background:none;border:0;color:#e0a458;font:300 44px Georgia,serif;padding:8px 14px;opacity:.85}#pv{left:6px}#nx{right:6px}
+#pn{position:fixed;left:0;right:0;bottom:0;max-height:66vh;padding:0 24px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--mu);border-radius:18px 18px 0 0;box-shadow:0 -12px 32px rgba(0,0,0,.4);z-index:4}
+#gr{height:30px;position:relative}#gr::before{content:"";position:absolute;left:50%;top:13px;width:46px;height:4px;margin-left:-23px;border-radius:2px;background:var(--mu)}
+#rw #ac{margin:0 0 8px}#rw p{margin:0;font-size:17px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}#pn.o #rw p{display:block}
+#bd{display:none}#pn.o #bd{display:block}#bd p{font-size:19px;line-height:1.6;margin:12px 0}
+#pn #ch{justify-content:space-between;margin-top:10px;padding:0}#pn #ch button{width:26px;height:26px;padding:8px;border:0;border-radius:50%;background:var(--mu);background-clip:content-box;font-size:0}#pn #ch button.on{padding:5px;background:var(--ac);background-clip:content-box}
+</style></head><body>
+<div id="in"><div><h2>Museum of Faded Things</h2><p>Everyday objects of India, 1950 to 2010</p><p class="s">Drag to turn each object. Tap any part to learn about it. Slide through the years to see what was in use.</p><button id="go">Step inside</button></div></div>
+
+<div id="st"><div id="wm"></div><canvas id="cv"></canvas><div id="hd"><small>Museum of Faded Things</small><div id="nm"></div><div id="yr"></div></div><button class="ar" id="pv" aria-label="Previous object">‹</button><button class="ar" id="nx" aria-label="Next object">›</button></div>
+<div id="pn"><div id="gr"></div><div id="rw"><button id="ac"></button><p id="tp"></p></div><div id="bd"><p id="tx"></p><p id="fx"></p></div><div id="ch"></div>
+<div id="sl"><input type="range" id="rg" min="1950" max="2010" value="1980"><span id="yl"></span></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const T=THREE,$=i=>document.getElementById(i),st=$("st");
+const nc=document.createElement("canvas");nc.width=nc.height=128;{const x=nc.getContext("2d");for(let i=0;i<4000;i++){const v=Math.random()*255|0;x.fillStyle="rgb("+v+","+v+","+v+")";x.fillRect(Math.random()*128,Math.random()*128,2,2)}}
+const nt=new T.CanvasTexture(nc);nt.wrapS=nt.wrapT=T.RepeatWrapping;
+const M=(c,r=.5,m=0)=>{const k=new T.MeshStandardMaterial({color:c,roughness:Math.min(1,r+.12),metalness:m,bumpMap:nt,bumpScale:.4});k.color.offsetHSL(0,-.1,-.02);return k};
+const mt=a=>a&&a.isMaterial?a:Array.isArray(a)?M(...a):M(a);
+const BK=[0x141414,.3,.15],CH=[0xd0d3d8,.18,1],CR=[0xe9dfc4,.45,0],RB=[0x161616,.8,0];
+const wc=document.createElement("canvas");wc.width=wc.height=256;{const x=wc.getContext("2d");x.fillStyle="#6a3d1e";x.fillRect(0,0,256,256);for(let i=0;i<90;i++){x.strokeStyle="rgba("+(i%2?"30,15,5":"140,90,50")+",.25)";x.lineWidth=1+Math.random()*2;const y=Math.random()*256;x.beginPath();x.moveTo(0,y);x.bezierCurveTo(80,y+8,170,y-8,256,y+Math.random()*6);x.stroke()}}
+const wt=new T.CanvasTexture(wc);wt.wrapS=wt.wrapT=T.RepeatWrapping;wt.repeat.set(.5,.5);wt.encoding=T.sRGBEncoding;
+const wd=()=>{const m=M(0xffffff,.5);m.map=wt;return m};
+const mk=(g,c,p,r)=>{const m=new T.Mesh(g,mt(c));m.position.set(...p);m.castShadow=m.receiveShadow=true;r.add(m);return m};
+const B=(w,h,d,c,p,r,q)=>{q=q||Math.min(.05,w/2.3,h/2.3,d/2.3);const x=w/2-q,y=h/2-q,s=new T.Shape();s.moveTo(-x,-y);s.lineTo(x,-y);s.lineTo(x,y);s.lineTo(-x,y);s.closePath();const e=new T.ExtrudeGeometry(s,{depth:d-2*q,bevelEnabled:true,bevelSize:q,bevelThickness:q,bevelSegments:3,curveSegments:1});e.translate(0,0,-(d-2*q)/2);return mk(e,c,p,r)};
+const C=(a,h,c,p,r,z)=>{const g=new T.CylinderGeometry(a,a,h,32);if(z)g.rotateX(Math.PI/2);return mk(g,c,p,r)};
+const LA=(pts,c,p,r)=>mk(new T.LatheGeometry(pts.map(a=>new T.Vector2(a[0],a[1])),36),c,p,r);
+const G=(p,r)=>{const g=new T.Group();g.position.set(...p);r.add(g);return g};
+const tg=(m,t,x)=>(m.userData.i=[t,x],m);
+let ac;const tn=(f,d,ty,v,at=0)=>{ac=ac||new AudioContext();const t=ac.currentTime+at,o=ac.createOscillator(),n=ac.createGain();o.type=ty;o.frequency.value=f;n.gain.setValueAtTime(v,t);n.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(n);n.connect(ac.destination);o.start(t);o.stop(t+d)};
+const nz=(d,v=.04)=>{ac=ac||new AudioContext();const n=ac.sampleRate*d,b=ac.createBuffer(1,n,ac.sampleRate),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=Math.random()*2-1;const s=ac.createBufferSource(),n2=ac.createGain();n2.gain.value=v;s.buffer=b;s.connect(n2);n2.connect(ac.destination);s.start()};
+const D=[
+{k:"Phone",n:"Rotary Telephone",x:"A 1977 survey counted about 1.8 million telephones in India, for 605 million people. By 1988, getting a connection could take years.",y:[1950,1999],o:-.35,t:"The family landline sat in the hallway, and everyone knew the number by heart. Push-button phones, then mobiles, ended the long, slow spin of the dial.",a:"Dial a number",
+b:g=>{const p={};tg(LA([[0,0],[1.45,0],[1.42,.1],[1.1,.5],[.85,.72],[0,.72]],BK,[0,-.35,0],g),"Bakelite body","Early sets were moulded from heavy bakelite, built to last for decades.");
+const r=mk(new T.TorusGeometry(.72,.06,12,40),CH,[0,.4,.1],g);r.rotation.x=Math.PI/2;p.d=tg(G([0,.4,.1],g),"Finger wheel","Every digit meant a full spin back. Numbers with 8s and 9s took the longest to dial.");C(.66,.05,CR,[0,0,0],p.d);for(let i=0;i<10;i++){const a=.55+i*.52;C(.075,.07,0x151515,[Math.cos(a)*.45,.03,Math.sin(a)*.45],p.d)}C(.15,.08,CH,[0,.04,0],p.d);
+const h=G([0,0,0],g);tg(h,"Handset","Lifting it off the cradle connected the call. Many homes kept a lock on the dial.");B(2.7,.24,.5,BK,[0,.98,-.45],h,.1);[-1.25,1.25].forEach(x=>{LA([[0,.3],[.34,.3],[.38,.2],[.3,0],[0,0]],BK,[x,.58,-.45],h);B(.14,.5,.14,CH,[x*.8,.35,-.45],g)});
+mk(new T.TubeGeometry(new T.CatmullRomCurve3([new T.Vector3(-1.25,.6,-.45),new T.Vector3(-1.9,.2,-.2),new T.Vector3(-1.4,-.25,.2)]),20,.04,6),BK,[0,0,0],g);return p},
+f:(p,u)=>p.d.rotation.y=-Math.sin(u*Math.PI)*2.4,s:()=>{for(let i=0;i<9;i++)tn(700,.03,"square",.04,i*.15)}},
+{k:"Radio",n:"Valve Radio",x:"When India became independent in 1947, All India Radio had just six stations. Vividh Bharati, launched on 3 October 1957, was built around film music.",y:[1950,1979],o:-.9,t:"The whole house gathered around it for news, cricket commentary and Vividh Bharati. Transistors, television and FM left the big wooden set behind.",a:"Tune the dial",
+b:g=>{const p={};tg(B(2.7,1.8,1.1,wd(),[0,0,0],g,.12),"Wooden cabinet","Cabinets were veneered wood, made to sit proudly as furniture.");
+const gr=tg(B(1.3,1.25,.05,[0xb89a5c,.95],[-.5,0,.56],g),"Speaker cloth","Valve sets needed a few minutes to warm up before the sound came.");for(let i=0;i<6;i++)B(1.25,.03,.02,0x3b2a14,[-.5,-.5+i*.2,.6],g);
+B(.9,.4,.03,CR,[.85,.5,.56],g);B(.03,.3,.02,0xc0392b,[.7,.5,.59],g);p.k=tg(C(.22,.2,BK,[.85,-.05,.6],g,1),"Tuning knob","You turned it slowly through static, hunting for a station.");C(.1,.24,CH,[0,0,0],p.k,1);B(.04,.18,.03,0xf5e9c8,[0,.14,.12],p.k);
+[-1.1,1.1].forEach(x=>C(.12,.2,BK,[x,-1,.4],g));return p},
+f:(p,u)=>p.k.rotation.z=-u*5,s:()=>{nz(1.2);tn(440,.8,"sine",.06,1.2)}},
+{k:"Typewriter",n:"Typewriter",x:"In the 1990s, Godrej & Boyce in Mumbai made about 50,000 typewriters a year, roughly a third of India’s output. It stopped making them in 2009.",y:[1950,1995],o:-.5,t:"Offices, courts and exam centres ran on typing. A typo meant retyping the whole page. Computers and word processors ended its reign.",a:"Type a line",
+b:g=>{const p={};const bd=[0x1f2a2e,.35,.3];B(2.9,.7,1.9,bd,[0,-.15,.1],g,.12);B(2.9,.9,.5,bd,[0,.45,-.65],g,.12);
+const c=p.c=tg(G([0,0,0],g),"Platen and carriage","The carriage slid along as you typed. A bell near the end of the line warned you to return it.");C(.22,3.1,RB,[0,.95,-.3],c).rotation.z=Math.PI/2;[-1.65,1.65].forEach(x=>{const k=C(.17,.2,CH,[x,.95,-.3],c);k.rotation.z=Math.PI/2});B(1.9,1.2,.02,0xf5efe0,[0,1.55,-.55],c).rotation.x=-.2;
+const kg=p.kg=tg(G([0,0,0],g),"Keys","Each key swung a metal arm to strike an inked ribbon against the paper.");p.k=[];for(let r=0;r<4;r++)for(let i=0;i<8;i++){const k=G([(i-3.5)*.32,.28+r*.1,.62-r*.3],kg);C(.12,.12,CH,[0,0,0],k);C(.1,.03,CR,[0,.07,0],k);k.userData.y=k.position.y;p.k.push(k)}B(1.6,.1,.2,CH,[0,.25,.9],kg);return p},
+f:(p,u)=>{p.k.forEach(k=>k.position.y=k.userData.y);if(u>0&&u<1)p.k[Math.floor(u*24)%32].position.y-=.08;p.c.position.x=.4-Math.min(u,.85)*.9+(u>.85?(u-.85)/.15*.765:0)},
+s:()=>{for(let i=0;i<14;i++)tn(180+i%3*40,.04,"square",.05,i*.1);tn(1800,.6,"sine",.06,1.6)}},
+{k:"Camera",n:"Film Camera",x:"A roll held only 24 or 36 pictures, and you saw none of them until the whole roll was developed.",y:[1950,2005],o:-.5,t:"Thirty-six shots had to last a whole wedding, and the prints came days later. Digital cameras, then phones, made photos instant.",a:"Wind and click",
+b:g=>{const p={};tg(B(2.7,.95,1.1,RB,[0,0,0],g,.1),"Leatherette body","Black leatherette covered the body for grip and protection.");tg(B(2.7,.45,1.14,CH,[0,.7,0],g,.08),"Top plate","The chrome top plate held the controls and the rangefinder.");
+B(.35,.2,.05,[0x20303a,.1,.5],[-.9,.7,.58],g);const ln=tg(G([0,-.05,.55],g),"Lens","No screen and no preview. You trusted your eye.");C(.62,.5,CH,[0,0,.2],ln,1);C(.5,.6,BK,[0,0,.45],ln,1);C(.4,.1,[0x1b3550,.05,.6],[0,0,.78],ln,1);
+p.l=tg(G([.95,1,0],g),"Film advance lever","You wound it after every shot, or the next picture overlapped.");B(.8,.06,.12,CH,[-.4,0,0],p.l,.02);p.b=tg(C(.13,.14,[0xb03a2e,.3,.6],[-.85,1,.2],g),"Shutter button","A soft click, and a moment was fixed on film.");C(.25,.1,CH,[.5,.96,.2],g);return p},
+f:(p,u)=>{p.l.rotation.y=Math.min(u/.5,1)*1.4*(u<.8?1:(1-u)/.2);p.b.position.y=1-(u>.55&&u<.7?.05:0)},
+s:()=>{for(let i=0;i<5;i++)tn(300,.03,"square",.04,i*.1);tn(220,.08,"square",.08,1.3)}},
+{k:"Letter",n:"Inland Letter",x:"India Post introduced the Inland Letter Card on 2 October 1950, with the postage already printed on it.",y:[1950,2005],o:0,t:"India Post’s blue Inland Letter folded into its own envelope, an easy way to send news across the country. Phones, then email and messaging, replaced it.",a:"Fold and seal",
+b:g=>{const p={},pc=[0x9fc4d6,.95];tg(B(1.7,.04,2.2,pc,[-.85,0,0],g,.015),"Writing area","You wrote inside, folded along the lines and sealed the gummed edge. No envelope needed.");const f=p.f=tg(G([0,.05,0],g),"Folding flap","The flap folded over and stuck down, with no envelope needed.");g.add(f);B(1.7,.04,2.2,pc,[.85,0,0],f,.015);for(let i=0;i<6;i++)B(1.2,.01,.04,0x34506b,[.85,.03,-.8+i*.3],f,.005);tg(B(.4,.012,.4,0xc0392b,[1.4,.03,-.8],f,.005),"Printed stamp","The postage was already printed on the sheet.");return p},
+f:(p,u)=>p.f.rotation.z=-Math.PI*Math.sin(u*Math.PI),s:()=>nz(.5,.06)},
+{k:"TV",n:"Black-and-White TV",x:"Doordarshan began in Delhi on 15 September 1959. Until 1975, only seven Indian cities had television service.",y:[1960,1990],o:-1.05,t:"Doordarshan began in Delhi in 1959. Families, then whole neighbourhoods, crowded around one set. Colour TV, cable and satellite channels replaced it.",a:"Fix the picture",
+b:g=>{const p={};B(2.7,2.1,1.6,wd(),[0,0,0],g,.14);B(1.95,1.6,.1,BK,[-.3,.05,.78],g,.06);p.s=tg(B(1.7,1.4,.05,[0x2a2a2a,.12,.2],[-.3,.05,.83],g,.03),"Screen","The signal drifted, so the picture rolled and snowed until you adjusted the antenna.");
+const kn=tg(G([0,0,0],g),"Control knobs","Channel and volume knobs clicked firmly, with no remote to be seen.");[.55,-.05].forEach(y=>{C(.15,.14,BK,[.98,y,.8],kn,1);C(.07,.16,CH,[.98,y,.8],kn,1)});for(let i=0;i<7;i++)B(.4,.03,.02,0x1a1208,[.98,-.55-i*.07,.8],g,.01);
+p.a=tg(G([0,1.05,0],g),"Antenna","Someone always had to climb up and turn it to fix the picture.");LA([[0,0],[.25,0],[.15,.15],[0,.2]],BK,[0,0,0],p.a);[-1,1].forEach(s=>{const r=C(.025,1.8,CH,[s*.5,.85,0],p.a);r.rotation.z=-s*.5});return p},
+f:(p,u)=>{p.a.rotation.y=Math.sin(u*Math.PI*3)*(1-u);p.s.material.color.lerpColors(new T.Color(0x2a2a2a),new T.Color(0xbfe3d6),u*u)},s:()=>nz(1.6,.05)},
+{k:"Cassette",n:"Cassette Tape",x:"Philips introduced the compact cassette in 1963. A blank tape let ordinary people record and copy music at home.",y:[1970,2005],o:-.2,t:"Cheap, recordable tapes carried film songs and bhajans across India. CDs, then MP3s and phones, ended the format.",a:"Rewind with a pencil",
+b:g=>{const p={};B(2.8,.4,1.8,[0x232323,.4,.05],[0,0,0],g,.07);tg(B(2.4,.03,.9,CR,[0,.2,-.5],g,.01),"Handwritten label","Handwritten labels marked mixtapes made for friends.");B(2.4,.035,.12,0xb03a2e,[0,.21,-.88],g,.01);B(1.7,.03,.55,0x0e0e0e,[0,.2,.3],g,.01);
+p.r=[-.6,.6].map(x=>{const r=tg(C(.3,.04,CR,[x,.22,.3],g),"Tape reels","Tapes tangled all the time. A pencil in the hole was the classic way to rewind.");C(.15,.06,0x222222,[0,0,0],r);for(let i=0;i<6;i++)B(.04,.07,.1,0x222222,[Math.cos(i)*.2,0,Math.sin(i)*.2],r,.01);return r});
+[-1.25,1.25].forEach(x=>[-.7,.7].forEach(z=>C(.07,.03,CH,[x,.2,z],g)));tg(C(.05,1.4,[0xe0a02a,.5,0],[0,.7,0],p.r[0]),"Pencil","The humble pencil was every cassette owner’s rewind tool.").rotation.x=.4;return p},
+f:(p,u)=>p.r.forEach(r=>r.rotation.y=-u*40),s:()=>{for(let i=0;i<20;i++)tn(120,.03,"sawtooth",.03,i*.1)}},
+{k:"Walkman",n:"Walkman",x:"Sony launched the Walkman in 1979. It made listening something you could do alone, on the move.",y:[1985,2005],o:-1.2,t:"Personal music, at last. A cassette Walkman let you carry songs on a bus or train. MP3 players and phones ended it.",a:"Press play",
+b:g=>{const p={};B(1.6,2.4,.5,[0xb9bdc4,.25,.85],[0,0,0],g,.12);B(1.4,.3,.04,[0x2f4f7a,.4,.2],[0,-.2,.27],g,.01);
+const w=tg(G([0,.65,.27],g),"Cassette window","You could watch the tape wind as the song played.");B(1.15,.85,.03,[0x0f0f0f,.1,.3],[0,0,0],w,.02);p.r=[-.28,.28].map(x=>C(.17,.04,CR,[x,0,.03],w,1));
+p.b=tg(B(.32,.4,.12,CH,[-.48,-.7,.28],g,.03),"Play button","Heavy mechanical buttons clunked when pressed.");B(.32,.4,.12,CH,[0,-.7,.28],g,.03);B(.32,.4,.12,CH,[.48,-.7,.28],g,.03);
+const h=tg(G([0,1.2,0],g),"Headphones","Foam-padded earpieces on a thin metal band: personal music, at last.");mk(new T.TorusGeometry(.95,.05,10,40,Math.PI),BK,[0,0,0],h);[-1,1].forEach(s=>mk(new T.SphereGeometry(.26,20,14),[0xd9822b,1,0],[s*.95,-.1,0],h));return p},
+f:(p,u)=>{p.r.forEach(r=>r.rotation.z=-u*30);p.b.position.z=.28-(u>0&&u<.15?.06:0)},s:()=>{tn(500,.05,"square",.06);nz(1.5,.015)}},
+{k:"STD Booth",n:"STD/PCO Booth",x:"In the three years to May 2000, Parliament was told that 75,881 STD/ISD/PCO booths were installed in Uttar Pradesh alone.",y:[1990,2008],o:-1,t:"Yellow-board booths let anyone make a long-distance call and pay by the meter. Mobile phones made them unnecessary.",a:"Make a call",
+b:g=>{const p={};B(2.9,1.1,1.4,wd(),[0,-.45,0],g,.08);B(3,.1,1.5,[0x3b2a1a,.4,0],[0,.15,0],g,.04);[-1.3,1.3].forEach(x=>B(.1,.7,.1,[0x555555,.4,.7],[x,.55,-.6],g,.02));
+const c=document.createElement("canvas");c.width=256;c.height=64;const x=c.getContext("2d");x.fillStyle="#f2c230";x.fillRect(0,0,256,64);x.fillStyle="#b3261e";x.font="bold 40px sans-serif";x.textAlign="center";x.fillText("STD ISD PCO",128,46);
+const sg=tg(B(2.9,.9,.1,0xf2c230,[0,1.2,-.6],g,.03),"Yellow sign","STD, ISD and PCO boards lined streets across the country.");mk(new T.PlaneGeometry(2.7,.7),0xffffff,[0,1.2,-.54],g).material.map=new T.CanvasTexture(c);
+const ph=tg(G([-.75,.3,.1],g),"Push-button phone","The shopkeeper’s phone had a lock, and a meter that counted your pulses.");B(.9,.25,.7,[0xd8d4c6,.4,0],[0,0,0],ph,.06);for(let i=0;i<12;i++)B(.12,.04,.1,0x333333,[(i%3-1)*.18,.14,.12+Math.floor(i/3)*.14-.28],ph,.01);B(1,.12,.2,[0xd8d4c6,.4,0],[0,.22,-.2],ph,.05);
+const m=tg(B(1,.5,.15,[0x1a1a1a,.4,.2],[.8,.5,.2],g,.04),"Pulse meter","The meter counted pulses, and your bill with them.");p.m=B(.8,.12,.02,0x7fe08a,[-.4,0,.09],m,.005);p.m.geometry.translate(.4,0,0);return p},
+f:(p,u)=>p.m.scale.x=Math.max(.05,Math.floor(u*6)/6),s:()=>{for(let i=0;i<5;i++)tn(1000,.12,"sine",.05,i*.4)}}];
+const sc=new T.Scene(),cam=new T.PerspectiveCamera(40,1,.1,100),rd=new T.WebGLRenderer({canvas:$("cv"),alpha:true,antialias:true});
+rd.setPixelRatio(Math.min(devicePixelRatio,2));rd.shadowMap.enabled=true;rd.toneMapping=T.ACESFilmicToneMapping;rd.outputEncoding=T.sRGBEncoding;
+const ec=document.createElement("canvas");ec.width=256;ec.height=128;{const x=ec.getContext("2d"),gr=x.createLinearGradient(0,0,0,128);gr.addColorStop(0,"#fff6e3");gr.addColorStop(.55,"#9a8467");gr.addColorStop(1,"#2a1f14");x.fillStyle=gr;x.fillRect(0,0,256,128);x.fillStyle="#fff";x.fillRect(30,20,50,30);x.fillRect(160,25,60,25)}
+sc.environment=new T.PMREMGenerator(rd).fromEquirectangular(new T.CanvasTexture(ec)).texture;
+sc.add(new T.HemisphereLight(0xfff2dc,0x6b5236,.35));const dl=new T.SpotLight(0xffe2b8,3,40,.6,.75);dl.position.set(3,9,5);dl.castShadow=true;dl.shadow.mapSize.set(1024,1024);sc.add(dl,dl.target);const rm=new T.DirectionalLight(0x9db8d8,.6);rm.position.set(-4,3,-5);sc.add(rm);
+const fl=new T.Mesh(new T.PlaneGeometry(30,30),new T.ShadowMaterial({opacity:.3}));fl.rotation.x=-Math.PI/2;fl.position.y=-1.2;fl.receiveShadow=true;sc.add(fl);
+
+const dp=new T.Points(new T.BufferGeometry().setAttribute("position",new T.BufferAttribute(Float32Array.from({length:300},(_,i)=>(Math.random()-.5)*(i%3==1?5:7)+(i%3==1?1:0)),3)),new T.PointsMaterial({color:0xffe9b8,size:.04,transparent:true,opacity:.55}));sc.add(dp);
+const sz=()=>{const w=st.clientWidth,h=st.clientHeight;rd.setSize(w,h,false);cam.aspect=w/h;cam.position.set(0,2,8.2/Math.min(1,cam.aspect*1.15));cam.lookAt(0,-.7,0);cam.updateProjectionMatrix()};
+addEventListener("resize",sz);
+const HINT="Tap any part of the object, such as a dial, key or knob. It will glow, and what it is and how it worked will appear right here.";
+let cur,g,P,act=null,dr=null,au=true,hl=[];const chips=[];
+function lit(o){hl.forEach(m=>m.emissive.setHex(0));hl=[];if(!o)return;o.traverse(n=>{if(n.isMesh){n.material.emissive.setHex(0x6a4510);hl.push(n.material)}})}
+function sel(i){cur=D[i];if(g)sc.remove(g);lit();g=new T.Group();P=cur.b(g);g.rotation.set(.25,-.6,0);g.position.y=-1.2-cur.o;g.scale.setScalar(.01);sc.add(g);cur.f(P,0);act=null;
+$("nm").textContent=cur.n;yr();$("tx").textContent=cur.t;$("fx").innerHTML="<b>Did you know?</b> "+cur.x;$("tp").textContent=HINT;$("ac").textContent=cur.a;$("wm").textContent=cur.y[0];chips.forEach((b,j)=>b.classList.toggle("on",j==i))}
+D.forEach((d,i)=>{const b=document.createElement("button");b.textContent=d.k;b.onclick=()=>sel(i);$("ch").appendChild(b);chips.push(b)});
+$("ac").onclick=()=>{au=false;cur.f(P,0);act=performance.now();cur.s()};
+const yr=()=>{const y=+$("rg").value;let n=0;if(cur)$("yr").textContent="In everyday use "+cur.y[0]+" to "+cur.y[1]+(y>=cur.y[0]&&y<=cur.y[1]?". In use in "+y+".":". Not in use in "+y+".");chips.forEach((b,i)=>{const on=y>=D[i].y[0]&&y<=D[i].y[1];n+=on;b.classList.toggle("off",!on)});$("yl").textContent=y+": "+n+" of 9 in use"};
+$("rg").oninput=yr;yr();
+const cv=$("cv"),rc=new T.Raycaster();let mv=0;
+cv.onpointerdown=e=>{au=false;mv=0;dr={x:e.clientX,y:e.clientY};cv.setPointerCapture(e.pointerId)};
+cv.onpointermove=e=>{if(!dr)return;const dx=e.clientX-dr.x,dy=e.clientY-dr.y;mv+=Math.abs(dx)+Math.abs(dy);g.rotation.y+=dx*.01;g.rotation.x=Math.max(-.2,Math.min(.7,g.rotation.x+dy*.01));dr={x:e.clientX,y:e.clientY}};
+cv.onpointerup=e=>{dr=null;if(mv>6)return;const r=cv.getBoundingClientRect();rc.setFromCamera(new T.Vector2((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1),cam);const h=rc.intersectObject(g,true)[0];let o=h&&h.object;while(o&&!o.userData.i)o=o.parent;lit(o);$("tp").textContent=o?o.userData.i[0]+": "+o.userData.i[1]:HINT};
+cv.onpointercancel=()=>dr=null;
+function lp(now){requestAnimationFrame(lp);dp.rotation.y+=.0006;dp.position.y=Math.sin(now/3000)*.1;if(g.scale.x<.995){g.scale.setScalar(g.scale.x+(1-g.scale.x)*.12);g.rotation.y+=(1-g.scale.x)*.15}if(au)g.rotation.y+=.004;if(act){const u=Math.min((now-act)/2400,1);cur.f(P,u);if(u>=1)act=null}rd.render(sc,cam)}
+sz();sel(0);requestAnimationFrame(lp);
+$("pv").onclick=()=>sel((D.indexOf(cur)+8)%9);$("nx").onclick=()=>sel((D.indexOf(cur)+1)%9);
+let sy=0;$("gr").onpointerdown=e=>{sy=e.clientY};$("gr").onpointerup=e=>{const d=e.clientY-sy,p=$("pn");if(d<-20)p.classList.add("o");else if(d>20)p.classList.remove("o");else p.classList.toggle("o")};$("go").onclick=()=>{$("in").classList.add("h");g.scale.setScalar(.01)};
+</script></body></html>
